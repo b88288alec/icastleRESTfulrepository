@@ -3,7 +3,9 @@ package com.icastle.facade;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 
@@ -30,7 +32,7 @@ import javax.servlet.http.HttpSession;
 public class HotelFacade {
 
 //	搜尋所有飯店
-	@RequestMapping(value="/hotelList", method=RequestMethod.GET, produces={"application/json", "application/xml"})
+	@RequestMapping(value="/hotelList", method=RequestMethod.GET, produces={"application/json"})
 	public List<ListVO> search(@RequestParam("type")String type, @RequestParam("starDate")String startDate, @RequestParam("endDate")String endDate, @RequestParam("peopleNum")Integer peopleNum, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		
@@ -59,7 +61,7 @@ public class HotelFacade {
 	}
 	
 //	選取單筆飯店
-	@RequestMapping(value="/roomlist", method=RequestMethod.GET, produces={"application/json", "application/xml"})
+	@RequestMapping(value="/roomlist", method=RequestMethod.GET, produces={"application/json"})
 	public List<RoomsVO> select(@RequestParam("hotelName")String hotelName, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		
@@ -71,10 +73,17 @@ public class HotelFacade {
 		
 //		取出hotelID
 		HotelService hs = new HotelService();
-		Integer hotelId = hs.getHotelId(hotelName, zone);
+		List<Object[]> nId = hs.getHotelId(hotelName, zone);
+		Integer hotelId = null;
+		String hotelFullName = null;
+		for(Object[] obj: nId){
+			hotelId = (Integer)obj[0];
+			hotelFullName = (String)obj[1];
+		}
 		
 //		放入session備用
 		session.setAttribute("hotelId", hotelId);
+		session.setAttribute("hotelName", hotelFullName);
 		
 //		查出一間飯店的多筆房間資訊
 		RoomsService rs = new RoomsService();
@@ -84,8 +93,8 @@ public class HotelFacade {
 	}
 	
 //	確認預訂畫面
-	@RequestMapping(value="/check", method=RequestMethod.GET, produces={"application/json", "application/xml"})
-	public CheckVO checkOrder(@RequestParam("roomName")String roomName, @RequestParam("email")String email, HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value="/check", method=RequestMethod.GET, produces={"application/json"})
+	public CheckVO checkOrder(@RequestParam("roomName")String roomName, @RequestParam("bedAdding")Boolean bedAdding, @RequestParam("customerRemark")String customerRemark, @RequestParam("email")String email, HttpServletRequest request, HttpServletResponse response){
 		HttpSession session = request.getSession();
 		
 //		取出存放在session內的各種資料
@@ -97,6 +106,12 @@ public class HotelFacade {
 //		取出房型資料
 		RoomsService rs = new RoomsService();
 		RoomsVO roomsVO = rs.findRoom(hotelId, peopleNum, star, end, roomName);
+		Integer stayDayNum = rs.getstayDayNum(star.toString(), end.toString());
+		Map<String,Integer> PerPrice = rs.getPerPriceByAuto(roomsVO.getRoomId(), roomsVO.getHotelId(), roomsVO.getRoomTypeId(), star.toString(), end.toString(), stayDayNum);
+		int totalPrice = rs.getTotalPrice(PerPrice);
+		if(bedAdding){
+			totalPrice = totalPrice + roomsVO.getPricePerPerson()*stayDayNum;
+		}
 		
 //		取出會員下訂資料
 		MembersService ms = new MembersService();
@@ -107,11 +122,81 @@ public class HotelFacade {
 		CheckVO checkVO = new CheckVO();
 		checkVO.setMembersVO(membersVO);
 		checkVO.setRoomsVO(roomsVO);
+		checkVO.setPerPrice(PerPrice);
+		checkVO.setTotalPrice(totalPrice);
+		checkVO.setBedAdding(bedAdding);
+		checkVO.setCustomerRemark(customerRemark);
 		
 //		存入session
 		session.setAttribute("CheckVO", checkVO);
+		session.setAttribute("stayDayNum", stayDayNum);
 		
 		return checkVO;
+	}
+	
+//	下訂
+	@RequestMapping(value="/order", method=RequestMethod.POST, produces={"application/json"})
+	public String order(HttpServletRequest request, HttpServletResponse response){
+		try{
+			HttpSession session = request.getSession();
+			
+//			取出存在session的內容
+			CheckVO checkVO = (CheckVO)session.getAttribute("CheckVO");
+			RoomsVO room = checkVO.getRoomsVO();
+			MembersVO member = checkVO.getMembersVO();
+			Integer totalPrice = checkVO.getTotalPrice();
+			
+//			把訂單資料輸入OrdersVO
+			OrdersVO order = new OrdersVO();
+			
+			order.setMemberId(member.getMemberId());
+			order.setRoomId(room.getRoomId());
+			order.setHotelId(room.getHotelId());
+			order.setHotelName((String)session.getAttribute("hotelName"));
+			order.setRoomTypeId(room.getRoomTypeId());
+			order.setRoomTypeName(room.getRoomTypeName());
+			order.setCheckinDay((java.sql.Date)session.getAttribute("starDate"));
+			order.setCheckoutDay((java.sql.Date)session.getAttribute("endDate"));
+			order.setRoomCount(1);
+			order.setPeopleNum((Integer)session.getAttribute("peopleNum"));
+			order.setBreakfast(room.isBreakfast());
+			order.setDinner(room.isDinner());
+			order.setAfternoonTea(room.isAfternoonTea());
+			order.setPrice(totalPrice);
+			order.setReservationer(member.getName());
+			order.setBdate(member.getBdate());
+			order.setTel(member.getTel());
+			order.setEmail(member.getEmail());
+			order.setAddr(member.getAddr());
+			order.setPersonId(member.getPersonId());
+			order.setCountry(member.getCountry());
+			order.setPassport(member.getPassport());
+			order.setBedAdding(checkVO.getBedAdding());
+			order.setPricePerPerson(room.getPricePerPerson());
+			order.setCustomerRemark(checkVO.getCustomerRemark());
+			order.setHotelRemark(room.getRemark());
+			order.setOrderState(true);
+			
+//			送到資料庫
+			RoomsService rs = new RoomsService();
+			rs.getOrderByAuto(room.getRoomId(), room.getHotelId(), room.getRoomTypeId(), ((java.sql.Date)session.getAttribute("starDate")).toString(), ((java.sql.Date)session.getAttribute("endDate")).toString(), (Integer)session.getAttribute("stayDayNum"), 1);
+			OrdersService os = new OrdersService();
+			os.newOrder(order);
+			
+//			刪除session
+			Enumeration en = session.getAttributeNames();
+			while(en.hasMoreElements()){
+				String name = (String)en.nextElement();
+				session.removeAttribute(name);
+			}
+			
+//			傳回是否成功
+			return "下訂成功!!";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "下訂失敗";
+		}
+		
 	}
 	
 //	測試用

@@ -222,8 +222,9 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 		return perPrice;
 	}
 
+//	RESTful用
 	@Override
-	public RoomsVO findRoom(Integer hotelId, Integer peopleNum, Date star, Date end, String roomName) {
+	public RoomsVO findRoomForREST(Integer hotelId, Integer peopleNum, Date star, Date end, String roomName) {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //		List<RoomsVO> list = new ArrayList<RoomsVO>();
@@ -264,5 +265,44 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 		}
 		return vo;
 	}
+	
+////	REST用
+//	public List<RoomsVO> findRoomsForREST(Integer hotelId, Integer peopleNum, Date star, Date end) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		List<RoomsVO> list = new ArrayList<RoomsVO>();
+//		try{
+//			session.beginTransaction();
+//			Query query = session.createSQLQuery("{call indexQueryGetRoom(?,?,?,?)}");
+//			query.setParameter(0, hotelId);
+//			query.setParameter(1, star);
+//			query.setParameter(2, end);
+//			query.setParameter(3, peopleNum);
+//			List<Object[]> listObj = query.list();
+//			for(Object[] arrayObj : listObj){
+//				RoomsVO vo = new RoomsVO();
+////				vo.setRoomId((Integer)arrayObj[0]);
+////				vo.setRoomTypeId((Integer)arrayObj[1]);
+////				vo.setHotelId((Integer)arrayObj[2]);
+////				vo.setRoomDate((Date)arrayObj[3]);
+//				vo.setRoomTypeName((String)arrayObj[4]);
+//				vo.setPeopleNum((Integer)arrayObj[5]);
+////				vo.setBookedNum((Integer)arrayObj[6]);
+////				vo.setRoomNumber((Integer)arrayObj[7]);
+//				vo.setPrice((Integer)arrayObj[8]);
+//				vo.setBreakfast((Boolean)arrayObj[9]);
+//				vo.setDinner((Boolean)arrayObj[10]);
+//				vo.setAfternoonTea((Boolean)arrayObj[11]);
+//				vo.setBedAddable((Boolean)arrayObj[12]);
+//				vo.setPricePerPerson((Integer)arrayObj[13]);
+//				vo.setRemark((String)arrayObj[14]);
+//				list.add(vo);
+//			}
+//			session.getTransaction().commit();
+//		}catch(RuntimeException e){
+//			session.getTransaction().rollback();
+//			throw e;
+//		}
+//		return list;
+//	}
 
 }

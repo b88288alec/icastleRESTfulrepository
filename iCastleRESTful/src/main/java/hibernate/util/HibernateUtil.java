@@ -13,6 +13,7 @@ import org.hibernate.service.ServiceRegistry;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.hotels.model.HotelVO;
 import com.icastle.members.model.MembersVO;
+import com.icastle.rooms.model.RoomsVO;
 
 public class HibernateUtil {
 
@@ -24,6 +25,7 @@ public class HibernateUtil {
     			.addClass(OrdersVO.class).addResource("com/icastle/Orders/model/OrdersVO.hbm.xml")
     			.addClass(MembersVO.class).addResource("com/icastle/members/model/MembersVO.hbm.xml")
     			.addClass(HotelVO.class).addResource("com/icastle/hotels/model/HotelVO.hbm.xml")
+    			.addClass(RoomsVO.class).addResource("com/icastle/rooms/model/RoomsVO.hbm.xml")
     			.configure();
     	ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(cfg.getProperties()).build();
         try {

@@ -166,13 +166,13 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public List<Integer> getId(String hotelName, String zone) {
+	public List getId(String hotelName, String zone) {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		List<Integer> hotelId = null;
+		List hotelId = null;
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("select hotelId from HotelVO where zone like ? and hotelName like ?");
+			Query query = session.createQuery("select hotelId,hotelName from HotelVO where zone like ? and hotelName like ?");
 			query.setParameter(0, "%"+zone+"%");
 			query.setParameter(1, "%"+hotelName+"%");
 			hotelId = query.list();

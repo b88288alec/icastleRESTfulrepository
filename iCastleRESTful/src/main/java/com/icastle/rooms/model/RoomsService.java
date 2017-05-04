@@ -50,7 +50,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			updateCount = getOrder(roomId, stayDayNum, roomCount);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			long start = 0;
 			long end = 0;
 			
@@ -73,7 +73,7 @@ public class RoomsService {
 	
 	//計算入住天數
 	public Integer getstayDayNum(String checkinDay, String checkoutDay){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		int stayDayNum = 0;
 		try {
 			long start = sdf.parse(checkinDay).getTime();
@@ -104,7 +104,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			PerPrice = getPerPrice(roomId, stayDayNum);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			long start = 0;
 			long end = 0;
 			
@@ -132,6 +132,11 @@ public class RoomsService {
 	
 	//REST查詢該飯店所在期間內的一筆房型
 	public RoomsVO findRoom(Integer hotelId, Integer peopleNum, Date star, Date end, String roomName){
-		return dao.findRoom(hotelId, peopleNum, star, end, roomName);
+		return dao.findRoomForREST(hotelId, peopleNum, star, end, roomName);
 	}
+	
+//	//REST查詢該飯店所在期間內的所有房型
+//	public List<RoomsVO> findRoomsForREST(Integer hotelId, Integer peopleNum, Date star, Date end){
+//		return dao.findRoomsForREST(hotelId, peopleNum, star, end);
+//	}
 }

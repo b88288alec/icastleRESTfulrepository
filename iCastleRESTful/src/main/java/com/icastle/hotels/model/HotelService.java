@@ -94,10 +94,10 @@ public class HotelService {
 	}
 	
 	//查詢飯店ID
-	public Integer getHotelId(String hotelName, String zone){
-		List<Integer> hotelId = dao.getId(hotelName, zone);
-		Integer result = hotelId.get(0);
+	public List getHotelId(String hotelName, String zone){
+		List hotelId = dao.getId(hotelName, zone);
+//		Integer result = (Integer)hotelId.get(0);
 		
-		return result;
+		return hotelId;
 	}
 }

@@ -34,5 +34,8 @@ public interface RoomsDAO_interface {
 	public Map<String,Integer> getPerPrice(Integer hotelId, Integer roomTypeId, Date checkinDay, Date checkoutDay);
 	
 	//REST查詢該飯店所在期間內的一筆房型
-	public RoomsVO findRoom(Integer hotelId, Integer peopleNum, Date star, Date end, String roomName);
+	public RoomsVO findRoomForREST(Integer hotelId, Integer peopleNum, Date star, Date end, String roomName);
+	
+//	//REST查詢該飯店的所有房型
+//	public List<RoomsVO> findRoomsForREST(Integer hotelId, Integer peopleNum, Date star, Date end);
 }

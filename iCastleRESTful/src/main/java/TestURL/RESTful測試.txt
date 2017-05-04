@@ -1,0 +1,7 @@
+http://localhost:8080/iCastle/hotelList?type=台北&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
+
+http://localhost:8080/iCastle/roomlist?hotelName=德立
+
+http://localhost:8080/iCastle/check?roomName=雅緻&bedAdding=true&customerRemark=需求雙人床&email=Sally@gmail.com
+
+http://localhost:8080/iCastle/order
