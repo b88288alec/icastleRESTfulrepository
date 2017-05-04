@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.icastle.Orders.model.OrdersVO" table="Orders" >
+        
+        <id name="orderId" column="orderId">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="orderedDate" column="orderedDate" />
+        <property name="memberId" column="memberId" />
+        <property name="roomId" column="roomId" />
+        <property name="hotelId" column="hotelId" />
+        <property name="hotelName" column="hotelName" />
+        <property name="roomTypeId" column="roomTypeId" />
+        <property name="roomTypeName" column="roomTypeName" />
+        <property name="checkinDay" column="checkinDay" />
+        <property name="checkoutDay" column="checkoutDay" />
+        <property name="roomCount" column="roomCount" />
+        <property name="peopleNum" column="peopleNum" />
+        <property name="breakfast" column="breakfast" />
+        <property name="dinner" column="dinner" />
+        <property name="afternoonTea" column="afternoonTea" />
+        <property name="price" column="price" />
+        <property name="roomNo" column="roomNo" />
+        <property name="reservationer" column="reservationer" />
+        <property name="bdate" column="bdate" />
+        <property name="tel" column="tel" />
+        <property name="email" column="email" />
+        <property name="addr" column="addr" />
+        <property name="personId" column="personId" />
+        <property name="country" column="country" />
+        <property name="passport" column="passport" />
+        <property name="bedAdding" column="bedAdding" />
+        <property name="pricePerPerson" column="pricePerPerson" />
+        <property name="customerRemark" column="customerRemark" />
+        <property name="hotelRemark" column="hotelRemark" />
+        <property name="memo" column="memo" />
+        <property name="orderState" column="orderState" />
+        <property name="cancelDate" column="cancelDate" />
+        
+<!--         <set name="orderFollowersVO" table="OrderFollowers" lazy="true" cascade="save-update" inverse="false"> -->
+<!--         	<key><column name="orderId" /></key> -->
+<!--         	<one-to-many class="com.icastle.orderfollowers.model.OrderFollowersVO" /> -->
+<!--         </set> -->
+        
+    </class>
+</hibernate-mapping>

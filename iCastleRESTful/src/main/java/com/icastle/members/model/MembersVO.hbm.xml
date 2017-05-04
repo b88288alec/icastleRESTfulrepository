@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.icastle.members.model.MembersVO" table="Members" >
+        
+        <id name="memberId" column="memberId">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="email" column="email" />
+        <property name="pw" column="pw" />
+        <property name="name" column="name" />
+        <property name="gender" column="gender" />
+        <property name="bdate" column="bdate" />
+        <property name="addr" column="addr" />
+        <property name="tel" column="tel" />
+        <property name="personId" column="personId" />
+        <property name="country" column="country" />
+        <property name="passport" column="passport" />
+        
+    </class>
+</hibernate-mapping>
