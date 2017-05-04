@@ -1,7 +1,7 @@
-http://localhost:8080/iCastle/hotelList?type=¥x¥_&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
+http://localhost:8080/iCastle/hotelList?type=å°åŒ—&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
 
-http://localhost:8080/iCastle/roomlist?hotelName=¼w¥ß
+http://localhost:8080/iCastle/roomlist?hotelName=å¾·ç«‹
 
-http://localhost:8080/iCastle/check?roomName=¶®½o&bedAdding=true&customerRemark=»İ¨DÂù¤H§É&email=Sally@gmail.com
+http://localhost:8080/iCastle/check?roomName=é›…ç·»&bedAdding=true&customerRemark=éœ€æ±‚é›™äººåºŠ&email=Sally@gmail.com
 
 http://localhost:8080/iCastle/order
