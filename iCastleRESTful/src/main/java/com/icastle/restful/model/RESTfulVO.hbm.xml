@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.icastle.restful.model.RESTfulVO" table="RESTful" >
+        
+        <id name="id" column="id">
+        </id>
+        
+        <property name="searchname" column="searchname" />
+        <property name="startdate" column="startdate" />
+        <property name="enddate" column="enddate" />
+        <property name="peoplenum" column="peoplenum" />
+        <property name="hotelid" column="hotelid" />
+        <property name="hotelname" column="hotelname" />
+        <property name="email" column="email" />
+        <property name="roomname" column="roomname" />
+        <property name="totalprice" column="totalprice" />
+        <property name="customerRemark" column="customerRemark" />
+        <property name="bedAdding" column="bedAdding" />
+        <property name="stayDayNum" column="stayDayNum" />
+        
+    </class>
+</hibernate-mapping>

@@ -14,6 +14,9 @@ public class CheckVO implements Serializable{
 	private Integer totalPrice;
 	private String customerRemark;
 	private Boolean bedAdding;
+	private java.sql.Date checkinDay;
+	private java.sql.Date checkoutDay;
+	private String hotelName;
 	
 	public RoomsVO getRoomsVO() {
 		return roomsVO;
@@ -50,6 +53,24 @@ public class CheckVO implements Serializable{
 	}
 	public void setBedAdding(Boolean bedAdding) {
 		this.bedAdding = bedAdding;
+	}
+	public java.sql.Date getCheckinDay() {
+		return checkinDay;
+	}
+	public void setCheckinDay(java.sql.Date checkinDay) {
+		this.checkinDay = checkinDay;
+	}
+	public java.sql.Date getCheckoutDay() {
+		return checkoutDay;
+	}
+	public void setCheckoutDay(java.sql.Date checkoutDay) {
+		this.checkoutDay = checkoutDay;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
 	}
 	
 }

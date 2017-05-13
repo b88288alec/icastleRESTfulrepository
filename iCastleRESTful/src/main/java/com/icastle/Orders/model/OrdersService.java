@@ -3,6 +3,7 @@ package com.icastle.Orders.model;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 
 import javax.xml.ws.RespectBinding;
 
@@ -22,8 +23,10 @@ public class OrdersService {
 	
 //	新增訂單
 	public void newOrder(OrdersVO ordersVO){
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
 
-		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
+		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getTimeInMillis()));
 
 		dao.insert(ordersVO);
 	}
@@ -32,7 +35,9 @@ public class OrdersService {
 	public void customerUpdate(Integer orderId, Boolean orderState){
 		OrdersVO order = dao.select_by_orderId(orderId);
 		
-		java.sql.Timestamp day = new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis());
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
+		
+		java.sql.Timestamp day = new java.sql.Timestamp(new GregorianCalendar().getTimeInMillis());
 		
 		order.setOrderState(orderState);
 		order.setCancelDate(day);

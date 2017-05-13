@@ -1,3 +1,4 @@
+local端
 http://localhost:8080/iCastle/hotelList?type=台北&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
 
 http://localhost:8080/iCastle/roomlist?hotelName=德立
@@ -5,3 +6,23 @@ http://localhost:8080/iCastle/roomlist?hotelName=德立
 http://localhost:8080/iCastle/check?roomName=雅緻&bedAdding=true&customerRemark=需求雙人床&email=Sally@gmail.com
 
 http://localhost:8080/iCastle/order
+
+=============================================================================================================
+獨立貓
+http://localhost:8081/iCastleRESTful/iCastle/hotelList?type=台北&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
+
+http://localhost:8081/iCastleRESTful/iCastle/roomlist?hotelName=德立
+
+http://localhost:8081/iCastleRESTful/iCastle/check?roomName=雅緻&bedAdding=true&customerRemark=需求雙人床&email=Sally@gmail.com
+
+http://localhost:8081/iCastleRESTful/iCastle/order
+
+=============================================================================================================
+Azure上線
+http://icastlerestful.azurewebsites.net/iCastleRESTful/iCastle/hotelList?type=台北&starDate=2017/6/2&endDate=2017/6/4&peopleNum=4
+
+http://icastlerestful.azurewebsites.net/iCastleRESTful/iCastle/roomlist?hotelName=德立
+
+http://icastlerestful.azurewebsites.net/iCastleRESTful/iCastle/check?roomName=豪華家庭房&bedAdding=true&customerRemark=需求雙人床&email=Sally@gmail.com
+
+http://icastlerestful.azurewebsites.net/iCastleRESTful/iCastle/order

@@ -7,16 +7,38 @@
 	<session-factory>
 
 		<!-- 連線池c3p0設定-->
+<!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=iCastle</property> -->
+<!-- 		<property name="hibernate.connection.username">sa</property> -->
+<!-- 		<property name="hibernate.connection.password">sa123456</property>        -->
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
+<!-- 		<property name="hibernate.c3p0.min_size">5</property> -->
+<!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
+<!-- 		<property name="hibernate.c3p0.timeout">1800</property> -->
+<!-- 		<property name="hibernate.c3p0.max_statements">50</property> -->
+		
+		<!--Azure -->
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=iCastle</property>
-		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password">sa123456</property>       
+		<property name="hibernate.connection.url">jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle</property>
+		<property name="hibernate.connection.username">starbooksuser@starbooksdb12</property>
+		<property name="hibernate.connection.password">Bb0192837465</property>       
 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">20</property>
 		<property name="hibernate.c3p0.timeout">1800</property>
 		<property name="hibernate.c3p0.max_statements">50</property>
         
+		<!--Azure培楨 -->
+<!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://eeit93icastle.database.windows.net:1433;database=iCastle</property> -->
+<!-- 		<property name="hibernate.connection.username">icastlemanager@eeit93icastle</property> -->
+<!-- 		<property name="hibernate.connection.password">Taiwanno1</property>        -->
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
+<!-- 		<property name="hibernate.c3p0.min_size">5</property> -->
+<!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
+<!-- 		<property name="hibernate.c3p0.timeout">1800</property> -->
+<!-- 		<property name="hibernate.c3p0.max_statements">50</property> -->
+
 		<!--SQL方言,以下使用SQLServer -->
 		<property name="hibernate.dialect">hibernate.util.SQLServer2012DialectWithNvarchar</property>
 
@@ -41,6 +63,7 @@
 		<mapping resource="com/icastle/members/model/MembersVO.hbm.xml" />
 		<mapping resource="com/icastle/hotels/model/HotelVO.hbm.xml" />
 		<mapping resource="com/icastle/rooms/model/RoomsVO.hbm.xml" />
+		<mapping resource="com/icastle/restful/model/RESTfulVO.hbm.xml" />
 <!-- 		<mapping resource="com/icastle/hotelphotos/model/hotelphotos.hbm.xml" />		 -->
 <!-- 		<mapping resource="com/icastle/orderfollowers/model/orderfollowers.hbm.xml" /> -->
 <!-- 		<mapping resource="com/icastle/roomtype/model/roomtype.hbm.xml" /> -->

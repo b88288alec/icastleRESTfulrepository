@@ -8,6 +8,9 @@ import com.icastle.hotels.model.HotelDAO_Interface;
 import com.icastle.members.model.MembersDAO_interface;
 import com.icastle.members.model.MembersHibernateDAO;
 import com.icastle.members.model.MembersVO;
+import com.icastle.restful.model.RESTfulHibernateDAO;
+import com.icastle.restful.model.RESTfulVO;
+import com.icastle.restful.model.RESTful_interface;
 import com.icastle.rooms.model.RoomsDAO_interface;
 import com.icastle.rooms.model.RoomsHibernateDAO;
 import com.icastle.rooms.model.RoomsService;
@@ -15,7 +18,7 @@ import com.icastle.rooms.model.RoomsVO;
 
 public class Test {
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 
 //		測試搜尋客戶資料
 //		MembersDAO_interface mh = new MembersHibernateDAO();
@@ -65,31 +68,45 @@ public class Test {
 		
 //		測試check
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		java.sql.Date start = null;
-		java.sql.Date end = null;
-		try {
-			start = new java.sql.Date(sdf.parse("2017/6/2").getTime());
-			end = new java.sql.Date(sdf.parse("2017/6/4").getTime());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//		java.sql.Date start = null;
+//		java.sql.Date end = null;
+//		try {
+//			start = new java.sql.Date(sdf.parse("2017/6/2").getTime());
+//			end = new java.sql.Date(sdf.parse("2017/6/4").getTime());
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		RoomsService rs = new RoomsService();
+//		RoomsVO roomsVO = rs.findRoom(1, 4, start, end, "雅緻");
+//		System.out.println(start.toString());
+//		Integer stayDayNum = rs.getstayDayNum(start.toString(), end.toString());
+//		Map<String,Integer> PerPrice = rs.getPerPriceByAuto(roomsVO.getRoomId(), roomsVO.getHotelId(), roomsVO.getRoomTypeId(), start.toString(), end.toString(), stayDayNum);
+//		for(String key: PerPrice.keySet()){
+//			System.out.println(key);
+//		}
+//		for(Integer value: PerPrice.values()){
+//			System.out.println(value);
+//		}
+//		int totalPrice = rs.getTotalPrice(PerPrice);
+//		System.out.println(totalPrice);
+//		roomsVO.setPrice(totalPrice);
+//		
 		
-		RoomsService rs = new RoomsService();
-		RoomsVO roomsVO = rs.findRoom(1, 4, start, end, "雅緻");
-		System.out.println(start.toString());
-		Integer stayDayNum = rs.getstayDayNum(start.toString(), end.toString());
-		Map<String,Integer> PerPrice = rs.getPerPriceByAuto(roomsVO.getRoomId(), roomsVO.getHotelId(), roomsVO.getRoomTypeId(), start.toString(), end.toString(), stayDayNum);
-		for(String key: PerPrice.keySet()){
-			System.out.println(key);
-		}
-		for(Integer value: PerPrice.values()){
-			System.out.println(value);
-		}
-		int totalPrice = rs.getTotalPrice(PerPrice);
-		System.out.println(totalPrice);
-		roomsVO.setPrice(totalPrice);
+//		測試RESTful的table
+//		RESTful_interface dao = new RESTfulHibernateDAO();
+//		RESTfulVO restVO = new RESTfulVO();
+//		restVO.setId(3345678);
+//		dao.insert(restVO);
 		
-	}
+//		restVO.setBedAdding(true);
+//		dao.update(restVO);
+		
+//		System.out.println(dao.search(3345678));
+		
+//		dao.delete(3345678);
+//		
+//	}
 
 }

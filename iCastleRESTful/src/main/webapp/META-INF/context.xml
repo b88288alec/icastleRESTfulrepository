@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?> 
+<Context displayName="iCastleRESTful" docBase="iCastleRESTful" path="/iCastleRESTful" reloadable="true">
+
+  <!--                  SQLServer                      -->
+<!--   <Resource name="jdbc/MemberDB" type="javax.sql.DataSource" -->
+<!--       username="icastlemanager@eeit93icastle" password="Taiwanno1" -->
+<!--       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+<!--       url="jdbc:sqlserver://eeit93icastle.database.windows.net:1433;database=iCastle"     -->
+<!--       maxActive="8" -->
+<!--       maxIdle="4" -->
+<!--       maxWait="5000" -->
+<!--   />    -->
+
+  <Resource name="jdbc/MemberDB" type="javax.sql.DataSource"
+      username="starbooksuser@starbooksdb12" password="Bb0192837465"
+      driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      url="jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle"    
+      maxActive="8"
+      maxIdle="4"
+      maxWait="5000"
+  />
+</Context>
